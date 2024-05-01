@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Užregistruoti vaiką į būrelį</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="mb-3">
+                            <label for="id_child" class="form-label">Vaikas</label>
+                            {{ form.child }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_session" class="form-label">Sesija</label>
+                            {{ form.session }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_registration_date_0" class="form-label">Registracijos data</label>
+                            {{ form.registration_date }}
+                        </div>
+                        <p style="color: red;"><strong>SVARBU!</strong></p>
+                        <p style="color: red;">Registracijos į būrelius vyksta mėnesio pabaigoje iki prasidedant einamajam mėnesiui.</p>
+                        <p style="color: red;">Išreiškiant norą lankyti būrelį prisiimami įsipareigojimai mokėti būrelio mėnesio mokestį, nepaisant lankomumo (ligos, atostogos ir pan.) Mėnesinis mokestis nėra mažinamas dėl mažesnio lankomumo ar mažesnio mėnesio dienų skaičiaus.</p>
+                        <p style="color: red;"><strong>Norint nutraukti būrelį BŪTINA kreiptis į <a href="{% url 'contact' %}" style="color: red;">kontaktus<i class="fas fa-info-circle"></i></a>.</strong></p>
+                        <button type="submit" class="btn btn-primary">Užregistruoti</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="card-title">Profilio - {{ user.username }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h3>Vartotojo informacija</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Vardas: {{ user.parent.first_name }}</li>
+                        <li class="list-group-item">Pavardė: {{ user.parent.last_name }}</li>
+                        <li class="list-group-item">El. paštas: {{ user.parent.email }}</li>
+                        <li class="list-group-item">Tel. numeris: {{ user.parent.phone_number }}</li>
+                        <li class="list-group-item">Adresas: {{ user.parent.address }}</li>
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    <h3>Vaikai</h3>
+                    <ul class="list-group">
+                        {% for child in children %}
+                            <li class="list-group-item">
+                                <strong>Vardas:</strong> {{ child.first_name }} {{ child.last_name }} <br>
+                                <strong>Amžius:</strong> {{ child.child_age }} <br>
+                                <strong>Mokykla:</strong> {{ child.school }} <br>
+                                <strong>Klasė:</strong> {{ child.classroom }} <br>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h3>Užsiregistravęs į būrelius</h3>
+                    <ul class="list-group">
+                        {% for club in enrolled_clubs %}
+                            <li class="list-group-item">
+                                {{ club.name }}
+                                <ul>
+                                    {% for session in club.sessions.all %}
+                                        {% for enrollment in session.enrollments.all %}
+                                            {% if enrollment.child in children %}
+                                                <li>
+                                                    <strong>Sesija:</strong> {{ session }}
+                                                    <br>
+                                                    <strong>Registracijos data:</strong> {{ enrollment.registration_date }}
+                                                    <br>
+                                                    <strong>Vaikas:</strong> {{ enrollment.child.first_name }} {{ enrollment.child.last_name }}
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

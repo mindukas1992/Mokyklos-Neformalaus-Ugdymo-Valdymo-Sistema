@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <title>Vartotojo vaikai</title>
+</head>
+<body>
+    <h1>{{ user.username }} vaikai</h1>
+    <ul>
+        {% for child in children %}
+            <li>{{ child.first_name }} {{ child.last_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

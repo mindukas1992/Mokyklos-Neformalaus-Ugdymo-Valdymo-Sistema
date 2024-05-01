@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Ar tikrai norite ištrinti vaiką?</h1>
+    <form action="{% url 'confirm_delete_child' child.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Taip, ištrinti</button>
+        <a href="{% url 'my_profile' %}" class="btn btn-secondary">Ne, atšaukti</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+.navbar {
+    background-color: #FFF; /* baltas fono spalva */
+    border-bottom: 1px solid #e7e7e7; /* sienelė po meniu */
+    font-family: 'Roboto', sans-serif; /* Šriftas */
+}
+
+.navbar-brand, .nav-link {
+    color: #333; /* juodos teksto spalvos pakeitimas */
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: #0056b3; /* Mėlyna spalva, pelei užvedus */
+    text-decoration: none; /* pašalinti pabraukimą */
+}
+
+.navbar-toggler {
+    border: none; /* pašalinti rėmelį */
+}
+
+.navbar-toggler-icon {
+    filter: invert(0.5); /* pakeisti ikonos spalvą */
+}
+
+.dropdown-menu {
+    background-color: #fff; /* fono spalva */
+    border: 0; /* pašalinti rėmelį */
+    box-shadow: 0 5px 15px rgba(0,0,0,.15); /* pridėti šešėlį */
+}
+
+.btn-outline-primary {
+    border-color: #0056b3; /* Mėlyna rėmelio spalva */
+    color: #0056b3; /* Mėlyna teksto spalva */
+}
+
+.btn-outline-primary:hover {
+    background-color: #0056b3; /* Mėlyna fono spalva */
+    color: #ffffff; /* balta teksto spalva */
+}
+
+.img {
+    display: block;
+    height: auto;
+    max-width: 100%;/* Leidžia naudoti padding */
+    max-height: 450px; /* Nustatyti norimą plotį */
+    margin-left: auto;
+    margin-right: auto; /* Centruoti horizontaliai */
+    padding-top: 10px; /* Pridėti tarpą nuotraukos viršuje */
+    padding-bottom: 20px; /* Pridėti tarpą nuotraukos apačioje */
+}

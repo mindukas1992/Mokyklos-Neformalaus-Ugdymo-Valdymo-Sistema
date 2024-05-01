@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Tavo informacija</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Vartotojo informacija</h5>
+                    <p class="card-text">El. paštas: {{ user.email }}</p>
+                    <p class="card-text">Vardas: {{ user.parent.first_name }}</p>
+                    <p class="card-text">Pavardė: {{ user.parent.last_name }}</p>
+                    <p class="card-text">Telefono numeris: {{ user.parent.phone_number }}</p>
+                    <p class="card-text">Adresas: {{ user.parent.address }}</p>
+                    <a href="{% url 'edit_parent' user.parent.id %}" class="btn btn-primary">Redaguoti mano informaciją</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>Mano vaikai</h2>
+            {% if children %}
+                <div class="list-group">
+                    {% for child in children %}
+                        <div class="list-group-item">
+                            <h5 class="mb-1">{{ child.first_name }} {{ child.last_name }}</h5>
+                            <p class="mb-1">Amžius: {{ child.child_age }} m.</p>
+                            <p class="mb-1">Mokykla: {{ child.school }}</p>
+                            <p class="mb-1">Klasė: {{ child.classroom }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'edit_child' child.id %}" class="btn btn-sm btn-secondary">Redaguoti</a>
+                                <form action="{% url 'delete_child' child.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-danger">Ištrinti</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Šiuo metu neturite pridėtų vaikų.</p>
+            {% endif %}
+            <a href="{% url 'add_child' %}" class="btn btn-success">Pridėti vaiką</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2>Užregistruoti būreliai</h2>
+            {% if enrolled_clubs %}
+                <ul class="list-group">
+                    {% for club_info in enrolled_clubs %}
+                        <li class="list-group-item">
+                            {{ club_info.club_name }} - {{ club_info.child_name }} - {{ club_info.registration_date }} - {{ club_info.session }}
+                        </li>
+                    {% endfor %}
+                    <p style="color: red;">Jeigu norite nutraukti būrelį, <strong>prašome kreiptis į <a href="{% url 'contact' %}" style="color: red;">kontaktus<i class="fas fa-info-circle"></i></a>.</strong></p>
+                </ul>
+            {% else %}
+                <p>Šiuo metu jūs nesate užsiregistravę į jokių būrelių.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

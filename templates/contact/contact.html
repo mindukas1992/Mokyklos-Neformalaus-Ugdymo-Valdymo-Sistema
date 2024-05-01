@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Kontaktai - Taškiaus būreliai</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Kontaktai</h2>
+            <p>Kontaktų informacija:</p>
+            <br>
+                <p>Vardas: Samanta</p>
+                <p>Pavardė: Staskevičiūtė</p>
+                <p>Pareigos: Neformalaus ugdymo koordinatorė</p>
+                <p>Telefonas: +37067627120</p>
+                <p>El. paštas: samanta.staskeviciute@taskius.lt</p>
+                <p>Adresas: Arklių g. 18, Vilnius</p>
+        </div>
+        <div class="col-md-6">
+            <h2>Susisiekite su mumis</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">Vardas</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name">
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Pavardė</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">El. paštas</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Jūsų žinutė</label>
+                    <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Siųsti</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

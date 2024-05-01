@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Registracijų sąrašas</h1>
+            <form method="get" class="mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Ieškoti pagal vardą ir pavardę" name="search_query">
+                    <button type="submit" class="btn btn-outline-secondary">Ieškoti</button>
+                </div>
+            </form>
+            <a href="{% url 'enrollment_list' %}" class="btn btn-secondary mb-3">Grįžti atgal</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Vaiko vardas</th>
+                        <th scope="col">Sesija</th>
+                        <th scope="col">Veiksmai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enrollment in enrollments %}
+                        <tr>
+                            <td>{{ enrollment.child.first_name }} {{ enrollment.child.last_name }}</td>
+                            <td>{{ enrollment.session }}</td>
+                            <td>
+                                <form action="{% url 'delete_enrollment' enrollment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Ištrinti</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

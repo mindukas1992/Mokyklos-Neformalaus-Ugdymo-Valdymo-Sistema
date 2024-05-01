@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'artistic_activities' %}?club_id={{ 1 }}">Meninės veiklos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'scientific_activities' %}?club_id={{ 13 }}">Mokslinės veiklos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sports_activities' %}?club_id={{ 16 }}">Sportinės veiklos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                {% for club in clubs %}
+                    <a href="{% url 'sports_activities' %}?club_id={{ club.id }}" class="list-group-item list-group-item-action">{{ club.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            {% if selected_club %}
+                <div class="club-info">
+                    <h1>{{ selected_club.name }}</h1>
+                    <img src="{{ selected_club.cover.url }}" class="img" alt="...">
+                    <p>Aprašymas: {{ selected_club.description|safe }}</p>
+                    <a href="{% url 'register_child' club_id=selected_club.id %}" class="btn btn-primary">Užregistruoti vaiką į šį būrelį</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Vartotojų sąrašas</h1>
+            <form method="get" class="mb-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Vartotojo vardas" name="username">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Vardas" name="first_name">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Pavardė" name="last_name">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-secondary">Ieškoti</button>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'user_list' %}" class="btn btn-secondary mb-3">Grįžti atgal</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Vartotojo vardas</th>
+                        <th scope="col">Vardas</th>
+                        <th scope="col">Pavardė</th>
+                        <th scope="col">Veiksmai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.parent.first_name }}</td>
+                            <td>{{ user.parent.last_name }}</td>
+                            <td>
+                                <a href="{% url 'user_detail' user.id %}" class="btn btn-sm btn-secondary">Peržiūrėti</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

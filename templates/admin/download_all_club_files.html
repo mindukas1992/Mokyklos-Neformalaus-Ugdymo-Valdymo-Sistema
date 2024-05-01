@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="card-title">Atsisiųsti būrelių failus</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for club in clubs %}
+                        <li class="list-group-item">
+                            <a href="{% url 'download_club_file' club.id %}" class="btn btn-primary">{{ club.name }} failas</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

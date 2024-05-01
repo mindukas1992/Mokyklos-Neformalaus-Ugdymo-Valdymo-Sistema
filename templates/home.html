@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <h2>Sveiki atvykę į Taškiaus mokyklos neformalaus ugdymo valdymo sistemą.</h2>
+                <p> Tai yra pagrindinis puslapis. Galite pereiti į kitus puslapius naudodami aukščiau pateiktas nuorodas.</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            height: 100%;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 200px; /* Nustatykite norimą aukštį */
+        }
+
+        .card-text {
+            flex-grow: 1;
+        }
+    </style>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/artistic.jpg' %}" class="card-img-top" alt="Artistic Activities">
+                    <div class="card-body">
+                        <h5 class="card-title">Meninės veiklos</h5>
+                        <p class="card-text">Tyrinėkite mūsų menines veiklas ir išlaisvinkite savo kūrybiškumą.</p>
+                        <a href="{% url 'artistic_activities' %}?club_id={{ 1 }}" class="btn btn-primary">Peržiūrėti veiklas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/scientific.jpg' %}" class="card-img-top" alt="Scientific Activities">
+                    <div class="card-body">
+                        <h5 class="card-title">Mokslinės veiklos</h5>
+                        <p class="card-text">Pasinerkite į mokslo ir inovacijų pasaulį su mūsų mokslinėmis veiklomis.</p>
+                        <a href="{% url 'scientific_activities' %}?club_id={{ 13 }}" class="btn btn-primary">Peržiūrėti veiklas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/sports.jpg' %}" class="card-img-top" alt="Sports Activities">
+                    <div class="card-body">
+                        <h5 class="card-title">Sportinės veiklos</h5>
+                        <p class="card-text">Išlikite aktyvūs ir sveiki užsiimdami mūsų sportinėmis veiklomis.</p>
+                        <a href="{% url 'sports_activities' %}?club_id={{ 16 }}" class="btn btn-primary">Peržiūrėti veiklas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

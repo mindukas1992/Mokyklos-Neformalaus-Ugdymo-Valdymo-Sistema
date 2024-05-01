@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Redaguoti vaiko informaciją</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Vardas</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ child.first_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Pavardė</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ child.last_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="child_age" class="form-label">Amžius</label>
+            <input type="number" class="form-control" id="child_age" name="child_age" value="{{ child.child_age }}">
+        </div>
+        <div class="mb-3">
+            <label for="school" class="form-label">Mokykla</label>
+            <input type="text" class="form-control" id="school" name="school" value="{{ child.school }}">
+        </div>
+        <div class="mb-3">
+            <label for="classroom" class="form-label">Klasė</label>
+            <input type="text" class="form-control" id="classroom" name="classroom" value="{{ child.classroom }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Išsaugoti pakeitimus</button>
+    </form>
+</div>
+{% endblock %}

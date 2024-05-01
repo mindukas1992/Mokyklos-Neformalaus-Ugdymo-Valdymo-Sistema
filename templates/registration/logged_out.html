@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="text-center">
+    <h2>Sėkmingai atsijungėte!</h2>
+    <p>Ačiū, kad naudojatės mūsų sistema. Norite prisijungti vėl?</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Prisijungti iš naujo</a>
+  </div>
+{% endblock %}

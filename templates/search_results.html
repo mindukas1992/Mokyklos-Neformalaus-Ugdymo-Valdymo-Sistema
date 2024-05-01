@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Paieškos rezultatai</h2>
+  {% if clubs %}
+    <h3>Būreliai</h3>
+    <ul class="list-group">
+      {% for club in clubs %}
+        <li class="list-group-item">
+          {% if club.activity_type == 'artistic' %}
+            <a href="{% url 'artistic_activities' %}?club_id={{ club.id }}">{{ club.name }}</a>
+          {% elif club.activity_type == 'scientific' %}
+            <a href="{% url 'scientific_activities' %}?club_id={{ club.id }}">{{ club.name }}</a>
+          {% elif club.activity_type == 'sports' %}
+            <a href="{% url 'sports_activities' %}?club_id={{ club.id }}">{{ club.name }}</a>
+          {% else %}
+            <a href="{% url 'home' %}">{{ club.name }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Vaikų sąrašas</h1>
+            <form method="get" class="mb-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Vaiko vardas" name="first_name">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Vaiko pavardė" name="last_name">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" placeholder="Vaiko amžius" name="child_age">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Mokykla" name="school">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" placeholder="Klasė" name="classroom">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-secondary">Ieškoti</button>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'children_list' %}" class="btn btn-secondary mb-3">Grįžti atgal</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tėvo vardas</th>
+                        <th scope="col">Tėvo pavardė</th>
+                        <th scope="col">Tėvo telefono numeris</th>
+                        <th scope="col">Vaiko vardas</th>
+                        <th scope="col">Vaiko pavardė</th>
+                        <th scope="col">Amžius</th>
+                        <th scope="col">Mokykla</th>
+                        <th scope="col">Klasė</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for child in children %}
+                        <tr>
+                            <td>{{ child.parent.first_name }}</td>
+                            <td>{{ child.parent.last_name }}</td>
+                            <td>{{ child.parent.phone_number }}</td>
+                            <td>{{ child.first_name }}</td>
+                            <td>{{ child.last_name }}</td>
+                            <td>{{ child.child_age }}</td>
+                            <td>{{ child.school }}</td>
+                            <td>{{ child.classroom }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

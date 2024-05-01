@@ -1,0 +1,36 @@
+from django.contrib.auth import views as auth_views
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('my_profile', views.my_profile, name='my_profile'),
+    path('register/', views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('add_child/', views.add_child, name='add_child'),
+    path('delete_child/<int:child_id>/', views.delete_child, name='delete_child'),
+    path('edit/parent/<int:pk>/', views.edit_parent, name='edit_parent'),
+    path('edit/child/<int:pk>/', views.edit_child, name='edit_child'),
+    path('activities/artistic/', views.artistic_activities, name='artistic_activities'),
+    path('activities/scientific/', views.scientific_activities, name='scientific_activities'),
+    path('activities/sports/', views.sports_activities, name='sports_activities'),
+    path('club/<int:club_id>/', views.club_detail, name='club_detail'),
+    path('enrollment/register/<int:club_id>/', views.register_child, name='register_child'),
+    path('enrollment/registration_success/', views.registration_success, name='registration_success'),
+    path('admin_profile/', views.admin_profile, name='admin_profile'),
+    path('activities/user_children/<int:user_id>/', views.user_children, name='user_children'),
+    path('user_detail/<int:user_id>/', views.user_detail, name='user_detail'),
+    path('contact/', views.contact, name='contact'),
+    path('success/', views.success, name='success'),
+    path('user-list/', views.user_list, name='user_list'),
+    path('download-all-club-files/', views.download_all_club_files, name='download_all_club_files'),
+    path('download-club-file/<int:club_id>/', views.download_club_file, name='download_club_file'),
+    path('children-list/', views.children_list, name='children_list'),
+    path('enrollments/', views.enrollment_list, name='enrollment_list'),
+    path('enrollments/delete/<int:enrollment_id>/', views.delete_enrollment, name='delete_enrollment'),
+    path('enrollments/confirm_delete/<int:enrollment_id>/', views.confirm_delete, name='confirm_delete'),
+    path('search/', views.search, name='search'),
+    path('delete_child/<int:child_id>/', views.delete_child, name='delete_child'),
+    path('confirm_delete_child/<int:child_id>/', views.confirm_delete_child, name='confirm_delete_child'),
+]

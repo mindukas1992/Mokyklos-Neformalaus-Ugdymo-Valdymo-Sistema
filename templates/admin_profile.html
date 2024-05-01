@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Vartotojų sąrašas</h2>
+                    <a href="{% url 'user_list' %}" class="card-link">Peržiūrėti sąrašą</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Vaikų sąrašas</h2>
+                    <a href="{% url 'children_list' %}" class="card-link">Peržiūrėti sąrašą</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Atsisiųsti būrelių failus</h2>
+                    <a href="{% url 'download_all_club_files' %}" class="card-link">Atsisiųsti failus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Registracijų sąrašas</h2>
+                    <a href="{% url 'enrollment_list' %}" class="card-link">Peržiūrėti sąrašą</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
