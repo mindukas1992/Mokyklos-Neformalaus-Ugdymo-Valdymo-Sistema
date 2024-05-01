@@ -93,18 +93,25 @@ def register(request):
 
 @login_required
 def my_profile(request):
-    parent, created = Parent.objects.get_or_create(user=request.user)
-    children = parent.children.all()
-    enrolled_clubs = []
-    for child in children:
-        enrollments = child.enrollments.select_related('session__club').all()
-        for enrollment in enrollments:
-            club_name = enrollment.session.club.name
-            child_name = f"{child.first_name} {child.last_name}"
-            registration_date = enrollment.registration_date
-            session = f"{enrollment.session.day_of_week} {enrollment.session.start_time}-{enrollment.session.end_time} ({enrollment.session.group})"
-            enrolled_clubs.append({'club_name': club_name, 'child_name': child_name, 'registration_date': registration_date, 'session': session, 'enrollment_id': enrollment.id})
-    return render(request, 'my_profile.html', {'parent': parent, 'children': children, 'enrolled_clubs': enrolled_clubs})
+    if request.user.is_superuser:
+        return redirect('admin_profile')
+    else:
+        try:
+            parent = request.user.parent
+            children = parent.children.all()
+            enrolled_clubs = []
+            for child in children:
+                enrollments = child.enrollments.select_related('session__club').all()
+                for enrollment in enrollments:
+                    club_name = enrollment.session.club.name
+                    child_name = f"{child.first_name} {child.last_name}"
+                    registration_date = enrollment.registration_date
+                    session = f"{enrollment.session.day_of_week} {enrollment.session.start_time}-{enrollment.session.end_time} ({enrollment.session.group})"
+                    enrolled_clubs.append({'club_name': club_name, 'child_name': child_name, 'registration_date': registration_date, 'session': session, 'enrollment_id': enrollment.id})
+            return render(request, 'my_profile.html', {'parent': parent, 'children': children, 'enrolled_clubs': enrolled_clubs})
+        except Parent.DoesNotExist:
+            parent = Parent.objects.create(user=request.user)
+            return redirect('edit_parent', pk=parent.pk)
 
 
 def artistic_activities(request):
@@ -152,7 +159,10 @@ def register_child(request, club_id):
 
     current_user = request.user
     if current_user.is_authenticated:
-        parent, created = Parent.objects.get_or_create(user=current_user)
+        try:
+            parent = current_user.parent
+        except Parent.DoesNotExist:
+            return redirect('some_error_url')
     else:
         return redirect('login')
 
